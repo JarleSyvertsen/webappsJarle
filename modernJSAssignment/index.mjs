@@ -267,7 +267,7 @@ try {
 
     /// Property shorthand ///
 
-    /*
+
       (function UsePropertyShorthand() {
           const name = 'Oslo';
           const age = 985;
@@ -275,8 +275,8 @@ try {
 
           // Remove all unnecesary syntax to let the test pass.
           let city = {
-              name: name,
-              age: age,
+              name,
+              age,
               dutch: !norwegian
           };
 
@@ -286,16 +286,16 @@ try {
 
           solved++;
       })();
-      */
+
 
     /// Object Spread Properties (ES2018) ///
 
-    /*
+
       (function UseObjectSpreadProperties1() {
           let obj = { val: 1 };
 
           // Use Object Spread Properties to let the tests succeed.
-          let copy = obj;
+          let copy = {...obj};
 
           // Don't make changes below this line
 
@@ -306,7 +306,7 @@ try {
 
           solved++;
       })();
-      */
+
 
     /*
       (function UseObjectSpreadProperties2() {
