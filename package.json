@@ -1,0 +1,14 @@
+{
+  "name": "moderne-js-oblig",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "nodemon index.js"
+  },
+  "dependencies": {
+    "expect": "27.4.6",
+    "nodemon": "2.0.15"
+  },
+  "keywords": []
+}
