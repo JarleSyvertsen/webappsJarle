@@ -21,6 +21,7 @@ try {
 
     (function UseLetOrConst() {
       // Use let (or const) instead of var to make the function succeed.
+      // This could be var without issue, but I do prefer to not use it at all.
       const x = 1;
       if (true) {
         const x = 2;
@@ -35,13 +36,13 @@ try {
 
     /// Template strings ///
 
-    /*
+
       (function UseTemplateStrings1() {
           const who = 'World';
           const addOne = x => x + 1;
 
           // Rewrite the line below to use template literals.
-          const greeting = 'Hello {who}! {addOne(2)} times.';
+          const greeting = `Hello ${who}! ${addOne(2)} times.`;
 
           // Don't make changes below this line
 
@@ -49,15 +50,15 @@ try {
 
           solved++;
       })();
-    */
+
 
     /// functions default parameters ///
 
-    /*
+
       (function UseDefaultParameters() {
 
           // Correct the syntax errors in the function.
-          function hello(who) {
+          function hello(who = "World") {
               return 'Hello ' + who + '!';
           }
 
@@ -68,16 +69,16 @@ try {
 
           solved++;
       })();
-      */
+
 
     /// Rest parameter ///
 
-    /*
+
       (function UseRestParameter() {
           // Add just one rest parameter and use the number of elements in this parameter
           // (What is the name of that property?) in the return statement to let the test pass.
-          function foo(a, b) {
-              return a + b;
+          function foo(a, b, ...c) {
+              return a + b + c.length;
           }
 
           // Don't make changes below this line
@@ -87,7 +88,7 @@ try {
 
           solved++;
       })();
-      */
+
 
     /// Spread operator ///
 
