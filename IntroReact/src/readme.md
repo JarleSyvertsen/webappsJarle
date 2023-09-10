@@ -5,7 +5,7 @@ Create a component called MyComponent in the components folder and use it to ren
 <h1>My First Component</h1>
 Use MyComponent in App.js
 
-// 2. Basic Prop
+// 2. Basic Prop 
 Add a "title" prop on MyComponent. Use it so that MyComponent render <h1>It Works</h1>
 
 // 3. Passing props to a child component
