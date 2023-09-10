@@ -1,16 +1,17 @@
-import {useState} from "react";
-export default function Alert() {
-    const [value, setValue] = useState('Default from hook');
-
+export default function Alert({ updateFunction, toggleVisible }) {
     function handleChange(e) {
-        setValue(e.target.value);
+        updateFunction(e.target.value)
+    }
+
+    function handleToggle() {
+        toggleVisible((current) => !current)
     }
 
     return (
         <>
-            <input type="text" onChange={handleChange} value={value} />
+            <input type="text" onChange={handleChange} />
             <br />
-            <button onClick={() => {alert(value)}}>Click me!</button>
+            <button onClick={handleToggle}>Click me!</button>
         </>
     )
 
