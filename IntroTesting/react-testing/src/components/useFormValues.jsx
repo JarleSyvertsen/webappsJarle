@@ -1,7 +1,7 @@
 import {useState} from "react";
 
 export default function useFormValues(submitFunction) {
-    const [formData, setFormData] = useState({name: "John Doe", address: "", password: ""})
+    const [formData, setFormData] = useState({name: "", address: "", password: ""})
 
     function handleChange(e) {
         const {id, value} = e.target;
@@ -9,7 +9,7 @@ export default function useFormValues(submitFunction) {
     }
 
     function verifyFields() {
-        return formData.name.length > 3;
+        return formData.name.length > 3 && formData.address.length > 8 && formData.password.length > 8;
     }
 
     async function submit(e) {

@@ -5,6 +5,7 @@ import {act} from "react-dom/test-utils";
 import {rest} from 'msw'
 import {setupServer} from 'msw/node'
 import userEvent from "@testing-library/user-event";
+
 describe('Validate the completeness of the returned component', () => {
     beforeEach(() => {
         render(<RegisterForm/>)
@@ -63,11 +64,10 @@ describe("Validate that the underlying hooks/values are working", () => {
         expect(name).toBe("Test Password")
     })
 })
-// Kunne gjerne gjort denne lengre, men da måtte jeg legge til defaults også cleare disse
-// i hvert trinn slik at de andre testene ikke har problemer p.ga. validering
-// så lar dette være som eksempel for nå.
+// Legger til et par ekstra felt eksempler senere, viktig å bare vise mocking+user-events
+
 describe("Validate functions should prevent unaccepted form values from being sent", () => {
-    test("Test that validate doesn't accept form with too short of a name", async() => {
+    test("Test that validate doesn't accept form with too short of a name", async () => {
         const handler = jest.fn();
 
         render(<RegisterForm submitHandler={handler}/>)
@@ -84,6 +84,45 @@ describe("Validate functions should prevent unaccepted form values from being se
 
         expect(handler).toHaveBeenCalledTimes(0)
     })
+    test("Test that validate doesn't accept empty forms", async () => {
+        const handler = jest.fn();
+
+        render(<RegisterForm submitHandler={handler}/>)
+
+        const form = document.querySelector('#registerUser')
+        const button = form.querySelector('#submitButton')
+
+        await act(async () => {
+            userEvent.click(button)
+        })
+
+        expect(handler).toHaveBeenCalledTimes(0)
+    })
+
+    test("Test that it validates a correct form", async () => {
+        const handler = jest.fn();
+
+        render(<RegisterForm submitHandler={handler}/>)
+
+        const form = document.querySelector('#registerUser')
+
+        const nameField = form.querySelector('#name')
+        const addressField = form.querySelector('#address')
+        const passwordField = form.querySelector('#password')
+
+        const button = form.querySelector('#submitButton')
+
+        await act(async () => {
+            userEvent.type(nameField, 'John Doe')
+            userEvent.type(addressField, 'John Doe Field 820E')
+            userEvent.type(passwordField, 'Notthatsecurepassword')
+            userEvent.click(button)
+        })
+
+        expect(handler).toHaveBeenCalledTimes(1)
+    })
+
+
 })
 
 describe("Validate that the form submits and with correct values", () => {
@@ -105,6 +144,14 @@ describe("Validate that the form submits and with correct values", () => {
                 (req, res, ctx) => {
                     return res(ctx.json("User registered successfully."))
                 }))
+
+        act(() => {
+            result.current.setFormData({
+                name: "John Doe",
+                address: "John Doe Field 820E",
+                password: 'Notthatsecurepassword'
+            })
+        })
 
         const appResponse = await result.current.submit()
 
@@ -148,6 +195,14 @@ describe("Validate that the form submits and with correct values", () => {
                     }
                 }
             ))
+
+        act(() => {
+            result.current.setFormData({
+                name: "John Doe",
+                address: "John Doe Field 820E",
+                password: 'Notthatsecurepassword'
+            })
+        })
 
         const appResponse = await result.current.submit()
 
