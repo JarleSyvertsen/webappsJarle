@@ -1,4 +1,4 @@
-import {render, renderHook} from '@testing-library/react';
+import {fireEvent, render, renderHook} from '@testing-library/react';
 import RegisterForm from "./components/RegisterForm";
 import useFormValues from "./components/useFormValues";
 import {act} from "react-dom/test-utils";
@@ -90,6 +90,21 @@ describe("Validate that the form submits and with correct values", () => {
 
         expect(appResponse).toBeTruthy()
     })
+    // Eksempel på hvordan jeg tenkte å teste både HTML element helt til server siden
+    // Får ikke det rendra elementet til å benytte den mockede serveren, da
+    test.skip("Test that an API point is reached when the submit button is pressed.", async () => {
+        const resolver = jest.fn();
+        server.use(rest.post('https://fakeAPInoresponseplease.org', resolver))
+
+        render(<RegisterForm/>)
+        const form = document.querySelector('#registerUser')
+        const button = form.querySelector('#submitButton')
+
+        fireEvent(button, new MouseEvent('click'))
+
+        expect(resolver).toHaveBeenCalledTimes(1)
+    })
+
 
     test("Test should send a proper object with the given keys to the API point.", async () => {
         const {result} = renderHook(() => useFormValues())

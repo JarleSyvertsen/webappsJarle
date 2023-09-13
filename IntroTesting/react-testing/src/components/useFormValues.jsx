@@ -13,6 +13,7 @@ export default function useFormValues() {
         if (e) {
             e.preventDefault();
         }
+
         let sendData = {method: "POST", body: JSON.stringify(formData)}
 
         try {
