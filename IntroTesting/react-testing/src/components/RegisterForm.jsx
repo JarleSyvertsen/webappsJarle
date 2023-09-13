@@ -1,11 +1,11 @@
 import useFormValues from "./useFormValues";
 
-export default function RegisterForm(props) {
-    const {formData, handleChange, handleSubmit} = useFormValues();
+export default function RegisterForm({ submitHandler }) {
+    const {formData, handleChange, submit} = useFormValues(submitHandler);
 
     return (
         <div className="App">
-            <form id="registerUser" onSubmit={handleSubmit}>
+            <form id="registerUser" onSubmit={submit}>
                 <h1>Create user here</h1>
                 <label htmlFor="name">Skriv inn navn</label>
                 <input id="name" value={formData.name} onChange={handleChange}/>

@@ -4,7 +4,7 @@ import useFormValues from "./components/useFormValues";
 import {act} from "react-dom/test-utils";
 import {rest} from 'msw'
 import {setupServer} from 'msw/node'
-
+import userEvent from "@testing-library/user-event";
 describe('Validate the completeness of the returned component', () => {
     beforeEach(() => {
         render(<RegisterForm/>)
@@ -29,8 +29,7 @@ describe('Validate the completeness of the returned component', () => {
         expect(inputs).toHaveLength(3)
     })
 })
-// Hadde vært kult å teste update her, men klarer ikke sende en falsk event uten target
-// Og en target ville involvert HTML
+
 describe("Validate that the underlying hooks/values are working", () => {
     test("Test that the name value updates when the set function is called", () => {
         const {result} = renderHook(() => useFormValues())
@@ -41,9 +40,7 @@ describe("Validate that the underlying hooks/values are working", () => {
         const name = result.current.formData.name
         expect(name).toBe("Test Doe")
     })
-})
 
-describe("Validate that the underlying hooks/values are working", () => {
     test("Test that the address value updates when the set function is called", () => {
         const {result} = renderHook(() => useFormValues())
 
@@ -54,9 +51,7 @@ describe("Validate that the underlying hooks/values are working", () => {
         const name = result.current.formData.address
         expect(name).toBe("Test Address")
     })
-})
 
-describe("Validate that the underlying hooks/values are working", () => {
     test("Test that the password value updates when the set function is called", () => {
         const {result} = renderHook(() => useFormValues())
 
@@ -68,6 +63,28 @@ describe("Validate that the underlying hooks/values are working", () => {
         expect(name).toBe("Test Password")
     })
 })
+// Kunne gjerne gjort denne lengre, men da måtte jeg legge til defaults også cleare disse
+// i hvert trinn slik at de andre testene ikke har problemer p.ga. validering
+// så lar dette være som eksempel for nå.
+describe("Validate functions should prevent unaccepted form values from being sent", () => {
+    test("Test that validate doesn't accept form with too short of a name", async() => {
+        const handler = jest.fn();
+
+        render(<RegisterForm submitHandler={handler}/>)
+
+        const form = document.querySelector('#registerUser')
+        const nameField = form.querySelector('#name')
+        const button = form.querySelector('#submitButton')
+
+        await act(async () => {
+            userEvent.clear(nameField)
+            userEvent.type(nameField, 'øe')
+            userEvent.click(button)
+        })
+
+        expect(handler).toHaveBeenCalledTimes(0)
+    })
+})
 
 describe("Validate that the form submits and with correct values", () => {
     const server = setupServer()
@@ -75,6 +92,9 @@ describe("Validate that the form submits and with correct values", () => {
     beforeAll(() => {
         server.listen()
 
+    })
+    afterEach(() => {
+        server.resetHandlers()
     })
 
     test("Test that the form should be sent when submit is invoked.", async () => {
@@ -86,7 +106,7 @@ describe("Validate that the form submits and with correct values", () => {
                     return res(ctx.json("User registered successfully."))
                 }))
 
-        const appResponse = await result.current.handleSubmit()
+        const appResponse = await result.current.submit()
 
         expect(appResponse).toBeTruthy()
     })
@@ -129,7 +149,7 @@ describe("Validate that the form submits and with correct values", () => {
                 }
             ))
 
-        const appResponse = await result.current.handleSubmit()
+        const appResponse = await result.current.submit()
 
         expect(appResponse).toBeTruthy()
     })
