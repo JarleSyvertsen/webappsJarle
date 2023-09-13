@@ -2,7 +2,8 @@ import {createEvent, fireEvent, render, renderHook, screen} from '@testing-libra
 import RegisterForm from "./components/RegisterForm";
 import useFormValues from "./components/useFormValues";
 import {act} from "react-dom/test-utils";
-
+import { rest } from 'msw'
+import { setupServer } from 'msw/node'
 
 describe('Validate the completeness of the returned component', () => {
   beforeEach(() => {
@@ -56,7 +57,7 @@ describe("Validate that the underlying hooks/values are working", () => {
 })
 
 describe("Validate that the underlying hooks/values are working", () => {
-  test("Test that the name value updates when the set function is called", () => {
+    test("Test that the name value updates when the set function is called", () => {
     const { result }  = renderHook(() => useFormValues())
 
     act(() =>  {
@@ -69,11 +70,35 @@ describe("Validate that the underlying hooks/values are working", () => {
 })
 
 describe("Validate that the form submits and with correct values", () => {
-  test("Test that the form should be sent when submit is clicked", () => {
-    const form = document.querySelector('#registerUser')
-    const button = form.querySelector('#submitButton')
+  const server = setupServer()
 
+  beforeAll(() => {
+    server.listen()
 
-    console.log(button)
+  })
+
+  test("Test that the form should be sent when submit is clicked", async () => {
+    const {result} = renderHook(() => useFormValues())
+
+    server.use(
+        rest.post('https://fakeAPInoresponseplease.org',
+            (req, res, ctx) => { return res(ctx.json("User registered successfully."))}))
+
+    const appResponse = await result.current.handleSubmit()
+
+    expect(appResponse).toBe("User registered successfully.")
+  })
+
+  test("Test should send a proper object to the API point.", async () => {
+    const {result} = renderHook(() => useFormValues())
+
+    server.use(
+        rest.post('https://fakeAPInoresponseplease.org',
+            (req, res, ctx) => { return res(req.json()) }
+        ))
+
+    const appResponse = await result.current.handleSubmit()
+
+    expect(appResponse).toBe("User registered successfully.")
   })
 })
