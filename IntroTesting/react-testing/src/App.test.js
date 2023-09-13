@@ -100,7 +100,9 @@ describe("Validate that the form submits and with correct values", () => {
         const form = document.querySelector('#registerUser')
         const button = form.querySelector('#submitButton')
 
-        fireEvent(button, new MouseEvent('click'))
+        await act(async () => {
+            fireEvent(button, new MouseEvent('click'))
+        })
 
         expect(resolver).toHaveBeenCalledTimes(1)
     })
