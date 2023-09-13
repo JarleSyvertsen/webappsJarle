@@ -91,7 +91,13 @@ describe("Validate that the form submits and with correct values", () => {
         expect(appResponse).toBeTruthy()
     })
     // Eksempel på hvordan jeg tenkte å teste både HTML element helt til server siden
-    // Får ikke det rendra elementet til å benytte den mockede serveren, da
+    // Får ikke det rendra elementet til å benytte den mockede serveren, ser det går å teste jest direkte
+    // men det blir veldig mange forskjellige pakker fort
+
+    // Vi kunne tillate funksjonen å få en mock i stedet for å se at den blir,
+    // men har lite lyst til å endre hovedkoden for testingens skyld.
+    // Det optimale hadde vært å få vite at en click leder til en post mot det gitte API punktet.
+
     test.skip("Test that an API point is reached when the submit button is pressed.", async () => {
         const resolver = jest.fn();
         server.use(rest.post('https://fakeAPInoresponseplease.org', resolver))
