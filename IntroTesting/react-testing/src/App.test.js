@@ -136,6 +136,10 @@ describe("Validate that the form submits and with correct values", () => {
         server.resetHandlers()
     })
 
+    afterAll(() =>{
+        server.close()
+    })
+
     test("Test that the form should be sent when submit is invoked.", async () => {
         const {result} = renderHook(() => useFormValues())
 
