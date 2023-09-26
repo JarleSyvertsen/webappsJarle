@@ -124,13 +124,13 @@ function Test(statement) {
     switch (value) {
         case "&&": {
             // Bruk && til å sjekke at ageOne og ageTwo er større enn 10
-            const message = "Erstatt denne";
+            const message = ageOne > 10 && ageTwo > 10;
             console.log("&&", message); // Skal gi: && true
             break;
         }
         case "??": {
             // Bruk ?? til å sjekke om ageOne har verdi. Hvis ikke gi ageTwo sin.
-            const message = "Erstatt denne";
+            const message = ageOne ?? ageTwo;
             console.log("??", message); // Skal gi: ?? 25
             break;
         }
@@ -138,20 +138,20 @@ function Test(statement) {
             // Bruk ? til å gi tilbake rett beskjed
             // Hvis ageOne er større enn 22 skal vi få tilbake "Allowed"
             // Hvis ikke skal vi få Not allowed
-            const message = "Erstatt denne";
+            const message = ageOne > 22 ? "Allowed" : "Not allowed";
             console.log("?", message); // Skal gi: ?? 25
             break;
         }
         case "?.": {
             // Ta bort "" rundt message
             // Bruk ?. til å unngå at denne feiler
-            const message = "statement.ageOne.length";
+            const message = statement.ageOne?.length;
             console.log("?.", message); // Skal gi:  ?. undefined
             break;
         }
         case "||": {
             // Bruk || til å gi tilbake ageTwo sin verdi
-            const message = "Erstatt denne";
+            const message = ageOne || ageTwo;
             console.log("||", message); // Skal gi:  || 25
             break;
         }
