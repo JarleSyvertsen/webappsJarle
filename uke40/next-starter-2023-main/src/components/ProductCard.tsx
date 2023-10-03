@@ -1,7 +1,6 @@
-export default function ProductCard(product: productInfo) {
- const {  name, price, category, description } = product;
+export default function ProductCard(product: productInfo & addItemButton) {
+ const { itemId, name, price, category, description, addItem} = product;
  const priceString = price.toString();
-
 
  return (
      <article className="grid grid-cols-2 productCard flex-initial border-2 rounded max-w-xs space-y-2">
@@ -9,6 +8,7 @@ export default function ProductCard(product: productInfo) {
          <p className="category text-end m-1 text-blue-500">{category}</p>
          <p className="description grid col-span-2 m-2">{description}</p>
          <p className="price font-bold m-2">{priceString} kr</p>
+         <button className="accent-blue-500" id={itemId} onClick={addItem}>Add to cart</button>
      </article>
  )
 }

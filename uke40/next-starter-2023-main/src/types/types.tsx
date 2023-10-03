@@ -1,25 +1,27 @@
-type productInfoList = {
-    products: productInfo[];
-}
-type productInfoMap = {
-    products: Map<String, productInfo>
-}
-
 type cartData = {
-    itemId: String,
-    count: Number
+    itemId: string,
+    count: number
 }
 
 type cartProp = {
-    itemId: String,
-    count: Number,
+    itemId: string,
+    count: number,
     itemName: String
 }
 
 type productInfo = {
-    id: String,
-    name: String,
-    price: Number,
-    category: String,
-    description: String
+    itemId: string,
+    name: string,
+    price: number,
+    category: string,
+    description: string
+}
+
+type addItemButton = {
+    addItem: Function
+}
+
+type incrementDecreaseButtons = {
+    increaseButton: Function,
+    decreaseButton: Function
 }

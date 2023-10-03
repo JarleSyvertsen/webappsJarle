@@ -1,22 +1,26 @@
+'use client'
 import ProductList from "@/components/ProductList";
 import Cart from "@/components/Cart";
+import useCart from "@/hooks/useCart";
+import {useEffect, useState} from "react";
 
-async function fetchProducts(): Promise<Map<String,productInfo>> {
-    const products = await fetch("http://localhost:3000/api/items/1")
-        .then((response) => response.json() as unknown as productInfo[])
 
-    const productMap = new Map<String, productInfo>
+export default function Home() {
 
-    products.map((jsonElement) => (productMap.set(jsonElement.id, { ...jsonElement})))
-    return productMap
-}
+    const [productArray, setProductArray] = useState(new Array<productInfo>)
+    const { addItemButton, cartState,incrementButton, decreaseButton } = useCart();
 
-export default async function Home() {
-    const productMap = await fetchProducts();
-    const productArray = Array.from(productMap.values())
+    useEffect(() => {
+            fetch("http://localhost:3000/api/items/1")
+            .then((response) => response.json() as unknown as productInfo[])
+            .then(data => setProductArray(data))
+    }, [])
+
+    const productMap = new Map(productArray.map(product => [product.itemId, {...product}]))
+
     return (
         <div>
-            <ProductList products={productArray}/>
-            <Cart products={productMap}></Cart>
+            <Cart products={productMap} cart={cartState} decreaseButton={decreaseButton} increaseButton={incrementButton}></Cart>
+            <ProductList products={productArray} addItem={addItemButton} />
         </div>)
 }

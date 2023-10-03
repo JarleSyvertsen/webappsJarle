@@ -45,7 +45,7 @@ const createProducts = (count: number) => {
     for(let i = 0; i < count; i++) {
         const id = generateId();
         const product = {
-             id: id,
+             itemId: id,
              name: generateName(),
              price: generatePrice(),
              category: generateCategory(),
