@@ -1,12 +1,13 @@
 import React, {useState} from "react";
+import {useMap} from "usehooks-ts";
 
 export default function useCart() {
-    const [cartState, setCartState] = useState(new Map<string, cartData>);
+    const [cartState, actions] = useMap<string, cartData>();
 
     const addItem = (inputId: string) => {
         const cartItem: cartData = {itemId: inputId, count: 1}
         const exists = cartState.get(inputId);
-        if(!exists) { setCartState(prevState => new Map(prevState.set(inputId, cartItem)))}
+        if(!exists) { actions.set(inputId, cartItem) }
     }
 
     const addItemButton = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -22,7 +23,15 @@ export default function useCart() {
             return;
         }
         updateItem.count += updateValue;
-        setCartState(prevState => new Map(prevState.set(inputId, updateItem)));
+        actions.set(inputId, updateItem);
+    }
+
+    const deleteItem = (inputId: string) => {
+        const deleteItem = cartState.get(inputId);
+        if(!deleteItem) {
+            return;
+        }
+        actions.remove(inputId);
     }
 
     const incrementButton = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -32,6 +41,10 @@ export default function useCart() {
         updateItem(e.target.id, -1);
     }
 
-  return {addItemButton, incrementButton, decreaseButton, cartState}
+    const deleteButton = (e: React.MouseEvent<HTMLButtonElement>) => {
+        deleteItem(e.target.id);
+    }
+
+  return {addItemButton, incrementButton, decreaseButton, deleteButton, cartState}
 }
 
