@@ -1,10 +1,11 @@
-export default function CartRow(cartItem: cartProp & incrementDecreaseButtons) {
+export default function CartRow(cartItem: cartProp & cartButtons) {
     return (
-        <article className="flex justify-center gap-20">
+        <article className="flex justify-center gap-10">
         <p className="itemCount">{cartItem.count.toString()}x</p>
         <p className="itemName">{cartItem.itemName}</p>
         <button className="btnIncrement" id={cartItem.itemId} onClick={cartItem.increaseButton}>+</button>
         <button className="btnDecrease" id={cartItem.itemId} onClick={cartItem.decreaseButton}>-</button>
+        <button className="btnDelete" id={cartItem.itemId} onClick={cartItem.deleteButton}>x</button>
         </article>
     )
 }

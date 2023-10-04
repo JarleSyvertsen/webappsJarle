@@ -1,6 +1,6 @@
 import ProductCard from "@/components/ProductCard";
 
-export default function ProductList(props: {products : productInfo[], addItem: Function}) {
+export default function ProductList(props: productArray & addItemButton) {
     const {products, addItem} = props;
     return (
         <div className="pt-24">

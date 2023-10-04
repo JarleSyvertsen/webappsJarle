@@ -1,3 +1,14 @@
+type productMap = {
+    products: Map<String, productInfo>
+}
+type cartMap = {
+    cart: Map<String, cartData>
+}
+
+type productArray = {
+    products : productInfo[]
+}
+
 type cartData = {
     itemId: string,
     count: number
@@ -21,7 +32,8 @@ type addItemButton = {
     addItem: Function
 }
 
-type incrementDecreaseButtons = {
+type cartButtons = {
     increaseButton: Function,
-    decreaseButton: Function
+    decreaseButton: Function,
+    deleteButton: Function
 }
