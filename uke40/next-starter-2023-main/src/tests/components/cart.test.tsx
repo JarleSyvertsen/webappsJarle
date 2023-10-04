@@ -13,8 +13,9 @@ describe("Cart functions should behave properly", () => {
         const {result } = renderHook(() => useCart())
         const button = document.createElement("button");
         button.setAttribute("id", idOfFirstProduct);
-        // @ts-ignore - Ingen god ide på hvorfor vi kan benytte typa react.Mouse events i hovedkoden, men
-        // Ikke sende det som en "gyldig" funksjon her.
+        // @ts-ignore - Ukjent hvordan jeg caster en MouseEvent til React.MouseEvent, og onClick
+        // gitt i reat propsa klager når jeg ikke møter standarden til en MouseEventHandler
+        // (Forventer React.MouseEvent)
         button.onclick = ((e) => result.current.addItemButton(e));
 
         await act(async () => {
