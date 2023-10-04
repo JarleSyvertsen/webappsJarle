@@ -1,3 +1,5 @@
+import {cartButtons, cartProp} from "@/types/types";
+
 export default function CartRow(cartItem: cartProp & cartButtons) {
     return (
         <article className="flex justify-center gap-10">

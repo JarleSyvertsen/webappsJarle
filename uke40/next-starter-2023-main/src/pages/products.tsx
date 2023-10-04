@@ -3,7 +3,7 @@ import ProductList from "@/components/ProductList";
 import Cart from "@/components/Cart";
 import useCart from "@/hooks/useCart";
 import {useEffect, useState} from "react";
-
+import {productInfo} from "@/types/types";
 export default function Page() {
 
     const [productArray, setProductArray] = useState(new Array<productInfo>)

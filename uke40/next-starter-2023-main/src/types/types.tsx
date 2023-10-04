@@ -1,26 +1,28 @@
-type productMap = {
+import {MouseEventHandler} from "react";
+
+export type productMap = {
     products: Map<String, productInfo>
 }
-type cartMap = {
+export type cartMap = {
     cart: Map<String, cartData>
 }
 
-type productArray = {
+export type productArray = {
     products : productInfo[]
 }
 
-type cartData = {
+export type cartData = {
     itemId: string,
     count: number
 }
 
-type cartProp = {
+export type cartProp = {
     itemId: string,
     count: number,
     itemName: String
 }
 
-type productInfo = {
+export type productInfo = {
     itemId: string,
     name: string,
     price: number,
@@ -28,12 +30,13 @@ type productInfo = {
     description: string
 }
 
-type addItemButton = {
-    addItem: Function
+export type addItemButton = {
+    addItem: MouseEventHandler
 }
 
-type cartButtons = {
-    increaseButton: Function,
-    decreaseButton: Function,
-    deleteButton: Function
+export type cartButtons = {
+    increaseButton: MouseEventHandler,
+    decreaseButton: MouseEventHandler,
+    deleteButton: MouseEventHandler
 }
+

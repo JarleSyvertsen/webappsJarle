@@ -1,3 +1,5 @@
+import {addItemButton, productInfo} from "@/types/types";
+
 export default function ProductCard(product: productInfo & addItemButton) {
  const { itemId, name, price, category, description, addItem} = product;
  const priceString = price.toString();

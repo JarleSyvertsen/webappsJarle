@@ -1,4 +1,5 @@
 import {useMap} from "usehooks-ts";
+import {cartData} from "@/types/types";
 
 export default function useCart() {
     const [cartState, actions] = useMap<string, cartData>();
