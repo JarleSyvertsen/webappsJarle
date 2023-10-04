@@ -32,7 +32,7 @@ describe("Cart functions should behave properly", () => {
         const {result} = renderHook(() => useCart())
         const button = document.createElement("button")
         button.setAttribute("id", idOfFirstProduct);
-        // @ts-ignore - OnClick (react) og onclick har to forskjellige typer, klarer ikke blidgjøre begge.
+        // @ts-ignore - OnClick (react) og onclick har to forskjellige type-krav, klarer ikke blidgjøre begge.
         button.onclick = ((e) => result.current.addItemButton(e))
 
         await act(async () => {
