@@ -3,13 +3,12 @@ import {cartData} from "@/types/types";
 
 export default function useCart() {
     const [cartState, actions] = useMap<string, cartData>();
-    // Litt usikker på hvordan den reneste måten er å unngå å bruke hele definisjonen av cartState
-    // Siden den vil ikke matche noen typedefinitions når vi starter å passe den rundt.
     const cartMap = (cartState as unknown as Map<String, cartData>)
     const addItem = (inputId: string) => {
         const cartItem: cartData = {itemId: inputId, count: 1}
         const exists = cartState.get(inputId);
-        if(!exists) { actions.set(inputId, cartItem) }
+        if(!exists) {
+            actions.set(inputId, cartItem) }
     }
 
     const updateItem = (inputId: string, updateValue: number) => {
@@ -51,6 +50,6 @@ export default function useCart() {
         if(target) {addItem(target.id);}
     }
 
-  return {addItemButton, incrementButton, decreaseButton, deleteButton, cartMap}
+  return {addItem, cartState, addItemButton, incrementButton, decreaseButton, deleteButton, cartMap}
 }
 

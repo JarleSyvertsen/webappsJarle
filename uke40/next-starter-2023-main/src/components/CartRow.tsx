@@ -2,7 +2,7 @@ import {cartButtons, cartProp} from "@/types/types";
 
 export default function CartRow(cartItem: cartProp & cartButtons) {
     return (
-        <article className="flex justify-center gap-10">
+        <article className="cartElement flex justify-center gap-10">
         <p className="itemCount">{cartItem.count.toString()}x</p>
         <p className="itemName">{cartItem.itemName}</p>
         <button className="btnIncrement" id={cartItem.itemId} onClick={cartItem.increaseButton}>+</button>

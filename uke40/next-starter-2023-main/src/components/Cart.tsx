@@ -11,7 +11,7 @@ export default function Cart(props: productMap & cartMap & cartButtons) {
     }
 
     return (
-        <ul className="cart z-10 absolute border-2 bg-white w-1/3">
+        <ul id="cart" className="cart z-10 absolute border-2 bg-white w-1/3">
             {cartList.map((cartItem) =>
                 <CartRow deleteButton={deleteButton} increaseButton={increaseButton} decreaseButton={decreaseButton} key={cartItem.itemId} itemId={cartItem.itemId} itemName={productNameFromId(cartItem.itemId)} count={cartItem.count}></CartRow>
             )}
