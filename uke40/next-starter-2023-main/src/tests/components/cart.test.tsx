@@ -29,7 +29,7 @@ describe("Cart functions should behave properly", () => {
                   increaseButton={result.current.incrementButton}
             ></Cart>)
 
-        const cartRows = document.querySelectorAll("#cart > .cartElement");
-        expect(cartRows.item(0)).toBeTruthy()
+        const cartRows = document.querySelector("#cart");
+        expect(cartRows?.children.item(0)).toBeTruthy()
     })
 })
