@@ -12,10 +12,6 @@ export default function useCart() {
         if(!exists) { actions.set(inputId, cartItem) }
     }
 
-    const addItemButton = (e: React.MouseEvent<HTMLButtonElement>) => {
-        addItem(e.target.id);
-    }
-
     const updateItem = (inputId: string, updateValue: number) => {
         const updateItem = cartState.get(inputId);
         if(!updateItem) {
@@ -36,17 +32,24 @@ export default function useCart() {
         actions.remove(inputId);
     }
 
-    const incrementButton = (e: React.MouseEvent<HTMLButtonElement>) => {
-        updateItem(e.target.id, 1);
+    const incrementButton = (e: Event) => {
+        const target = e.target as HTMLButtonElement;
+        if(target) {updateItem(target.id, 1)}
     }
-    const decreaseButton = (e: React.MouseEvent<HTMLButtonElement>) => {
-        updateItem(e.target.id, -1);
-    }
-
-    const deleteButton = (e: React.MouseEvent<HTMLButtonElement>) => {
-        deleteItem(e.target.id);
+    const decreaseButton = (e: Event) => {
+        const target = e.target as HTMLButtonElement;
+        if(target) {updateItem(target.id, -1);}
     }
 
+    const deleteButton = (e: Event) => {
+        const target = e.target as HTMLButtonElement;
+        if(target) {deleteItem(target.id);}
+    }
+
+    const addItemButton = (e: Event) => {
+        const target = e.target as HTMLButtonElement;
+        if(target) {addItem(target.id);}
+    }
 
   return {addItemButton, incrementButton, decreaseButton, deleteButton, cartMap}
 }
