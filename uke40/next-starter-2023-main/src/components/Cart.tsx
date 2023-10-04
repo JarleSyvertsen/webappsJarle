@@ -15,7 +15,7 @@ export default function Cart(props: productMap & cartMap & cartButtons) {
     return (
         <>
         <button onClick={() => setToggled((prev) => !prev)}>Open Cart</button>
-            <section id="cart" className={`${toggled ? "opacity-100" : "opacity-0 invisible"} cart absolute mx-5 z-10 min-h-full w-1/3 border-2 bg-white transition-opacity ease-in-out duration-700`}>
+            <section id="cart" className={`${toggled ? "opacity-100" : "opacity-0 invisible"} cart absolute mx-5 z-10 h-1/2 w-1/3 border-2 bg-white transition-opacity ease-in-out duration-700`}>
             {cartList.map((cartItem) =>
                 <CartRow deleteButton={deleteButton} increaseButton={increaseButton} decreaseButton={decreaseButton} key={cartItem.itemId} itemId={cartItem.itemId} itemName={productNameFromId(cartItem.itemId)} count={cartItem.count}></CartRow>
             )}
