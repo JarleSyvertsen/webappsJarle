@@ -1,4 +1,5 @@
 import CartRow from "@/components/CartRow";
+import {cartButtons, cartMap, productMap} from "@/types/types";
 
 export default function Cart(props: productMap & cartMap & cartButtons) {
     const {products, cart, deleteButton, increaseButton, decreaseButton} = props;

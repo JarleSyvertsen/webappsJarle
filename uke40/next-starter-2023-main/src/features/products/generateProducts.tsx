@@ -1,4 +1,5 @@
 import {uuidv4} from "@mswjs/interceptors/lib/utils/uuid";
+import {productInfo} from "@/types/types";
 
 const positiveAdjective = ["Stellar", "Perfect", "Cool", "Nice", "Awesome", "Impressive", "Considerable", "Desireable"];
 const colours = ["Blue", "Red", "Purple", "Green", "Orange", "Yellow", "Grey"]

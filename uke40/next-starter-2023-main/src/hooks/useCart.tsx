@@ -32,21 +32,21 @@ export default function useCart() {
         actions.remove(inputId);
     }
 
-    const incrementButton = (e: Event) => {
+    const incrementButton = (e: MouseEvent) => {
         const target = e.target as HTMLButtonElement;
         if(target) {updateItem(target.id, 1)}
     }
-    const decreaseButton = (e: Event) => {
+    const decreaseButton = (e: MouseEvent) => {
         const target = e.target as HTMLButtonElement;
         if(target) {updateItem(target.id, -1);}
     }
 
-    const deleteButton = (e: Event) => {
+    const deleteButton = (e: MouseEvent) => {
         const target = e.target as HTMLButtonElement;
         if(target) {deleteItem(target.id);}
     }
 
-    const addItemButton = (e: Event) => {
+    const addItemButton = (e: MouseEvent) => {
         const target = e.target as HTMLButtonElement;
         if(target) {addItem(target.id);}
     }

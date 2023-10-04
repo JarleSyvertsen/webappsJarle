@@ -8,7 +8,7 @@ import userEvent from "@testing-library/user-event";
 
 describe('Validate the completeness of the returned component', () => {
     beforeEach(() => {
-        render(<RegisterForm/>)
+        render(<RegisterForm />)
     })
     test('Should contain a form element', () => {
         const form = document.querySelector('#registerUser')

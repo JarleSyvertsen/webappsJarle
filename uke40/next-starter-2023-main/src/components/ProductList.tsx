@@ -1,4 +1,5 @@
 import ProductCard from "@/components/ProductCard";
+import {addItemButton, productArray} from "@/types/types";
 
 export default function ProductList(props: productArray & addItemButton) {
     const {products, addItem} = props;
