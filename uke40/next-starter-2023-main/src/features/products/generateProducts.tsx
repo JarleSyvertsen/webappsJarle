@@ -57,4 +57,4 @@ const createProducts = (count: number) => {
     return productMap;
 }
 
-export { createProducts }
+export { createProducts, positiveAdjective, colours, substantive, fluffWords }
