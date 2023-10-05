@@ -5,7 +5,7 @@ const positiveAdjective = ["Stellar", "Perfect", "Cool", "Nice", "Awesome", "Imp
 const colours = ["Blue", "Red", "Purple", "Green", "Orange", "Yellow", "Grey"]
 const categories = ["Cheese", "Electronics", "Camping", "Archery", "Canned Goods", "Clothing"]
 const substantive = ["Television", "Rod", "Glasses", "Glue", "Glowing Rock", "Not Glowing Rock"]
-const fluffWords = ["Recommended by 9/10th of a dentist", "Aromatic", "Delightful", "Works on raccoons", "Does not work on raccoons", "As seen on TV"]
+const fluffWords = ["Agreeable", "Large", "Calm", "Dazzling", "Mouse", "Car", "Bike", "Approved", "Aromatic", "Delightful", "As", "Seen", "On", "TV", "Raccoon", "Lactose", "Flowery"]
 
 
 const generateId = () => {
@@ -37,6 +37,7 @@ const generateDescription = (length: number) => {
     for(let i = 0; i < length; i++) {
         description = description.concat(getRandomItemFromArray(fluffWords) + " ")
     }
+    description = description.substring(0, description.length - 1)
     return description;
 }
 
@@ -50,7 +51,7 @@ const createProducts = (count: number) => {
              name: generateName(),
              price: generatePrice(),
              category: generateCategory(),
-             description: generateDescription(5)
+             description: generateDescription(8)
         }
         productMap.set(id, product);
     }

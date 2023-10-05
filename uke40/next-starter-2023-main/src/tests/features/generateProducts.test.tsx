@@ -5,7 +5,7 @@ import {
     positiveAdjective,
     substantive
 } from "@/features/products/generateProducts";
-import {productInfo} from "@/types/types";
+import {fail} from "assert";
 
 describe("The returned elements from generateProducts should contain certain attributes.", () => {
     test("Generate products should return the correct amount of elements", () => {
@@ -34,11 +34,11 @@ describe("The returned elements from generateProducts should contain certain att
     test("The description should only consist of fluff words", () => {
         const products = createProducts(5);
         const product = products.entries().next().value[1];
-        const descriptionParts = product.description.split(' ');
-
-
-        test.each(descriptionParts)("Add parts", ({part}) => {
-
-        }
-    }
-)
+        const descriptionParts = product.description.split(' ') as string[];
+        descriptionParts.forEach((part) => {
+            if (!fluffWords.includes(part)) {
+               fail('Mismatch found')
+           }
+        })
+    })
+})
