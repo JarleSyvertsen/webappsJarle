@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import {productInfo} from "@/types/types";
-import {response} from "msw";
 
 export default function registerForm() {
     const [formData, setFormData] = useState({} as productInfo);

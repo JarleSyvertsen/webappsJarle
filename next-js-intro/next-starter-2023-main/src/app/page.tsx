@@ -1,5 +1,3 @@
-import {redirect} from 'next/navigation';
-
 export default function Home() {
     return (
         <article className="w-1/3 m-auto mt-10">
